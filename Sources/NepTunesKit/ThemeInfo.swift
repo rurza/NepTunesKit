@@ -22,15 +22,19 @@ public struct ThemeInfo {
     /// unique id of the theme
     ///
     /// reverse DNS notation is recommended, for example: com.software.NepTunes.DefaultTheme
-    public var id: String
+    public var identifier: String
 
     /// file URL to display the image in the theme picker
     public var screenshotFileURL: URL
 
-    public init(name: String, version: UInt, id: String, screenshotFileURL: URL) {
+    /// the full name of the author, for example: Adam Różyński
+    public var author: String
+
+    public init(name: String, version: UInt, identifier: String, screenshotFileURL: URL, author: String) {
         self.name = name
         self.version = version
-        self.id = id
+        self.identifier = identifier
         self.screenshotFileURL = screenshotFileURL
+        self.author = author
     }
 }
