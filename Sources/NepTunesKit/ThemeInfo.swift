@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct ThemeInfo {
+public struct ThemeInfo: Hashable {
 
     /// The name of the theme
     ///
@@ -24,17 +24,26 @@ public struct ThemeInfo {
     /// reverse DNS notation is recommended, for example: com.software.NepTunes.DefaultTheme
     public var identifier: String
 
-    /// file URL to display the image in the theme picker
-    public var screenshotFileURL: URL
-
     /// the full name of the author, for example: Adam Różyński
     public var author: String
 
-    public init(name: String, version: UInt, identifier: String, screenshotFileURL: URL, author: String) {
+    public init(name: String,
+                version: UInt,
+                identifier: String,
+                author: String) {
         self.name = name
         self.version = version
         self.identifier = identifier
-        self.screenshotFileURL = screenshotFileURL
         self.author = author
+    }
+
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(identifier)
+    }
+}
+
+extension ThemeInfo: Identifiable {
+    public var id: String {
+        identifier
     }
 }
