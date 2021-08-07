@@ -23,7 +23,7 @@ public protocol Theme {
     /// it should contain the working theme
     func themeWindow() -> NSWindow
 
-    func preferencesView() -> AnyView
+    func preferencesView() -> AnyView?
 
     func trackDidChange(_ track: Track?)
 

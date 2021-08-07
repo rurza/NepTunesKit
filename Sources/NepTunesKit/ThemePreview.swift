@@ -12,18 +12,18 @@ public struct ThemePreview {
 
     public let themePreview: (Track) -> AnyView
 
-    public let themeBackgroundColor: (Track, @escaping (NSColor) -> Void) -> Void
-    
+    public let previewBackgroundColor: (Track, @escaping (NSColor) -> Void) -> Void
+
     /// file URL ti display the in the theme picker list
     ///
     /// it will be displayed in the rounded rectangle
     public let iconImage: NSImage
     
     public init(themePreview: @escaping (Track) -> AnyView,
-                themeBackgroundColor: @escaping (Track, @escaping (NSColor) -> Void) -> Void,
+                previewBackgroundColor: @escaping (Track, @escaping (NSColor) -> Void) -> Void,
                 iconImage: NSImage) {
         self.themePreview = themePreview
-        self.themeBackgroundColor = themeBackgroundColor
+        self.previewBackgroundColor = previewBackgroundColor
         self.iconImage = iconImage
     }
     
