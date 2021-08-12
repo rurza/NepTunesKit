@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Track {
+public struct Track: Equatable {
 
     public let title: String
     public let artist: String
