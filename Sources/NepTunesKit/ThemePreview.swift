@@ -8,11 +8,14 @@
 import Cocoa
 import SwiftUI
 
+public typealias ColorRGBDescription = (red: UInt8, green: UInt8, blue: UInt8)
+public typealias PreviewBackgroundHandler = (Track) async throws -> ColorRGBDescription
+
 public struct ThemePreview {
 
     public let themePreview: (Track) -> AnyView
 
-    public let previewBackgroundColor: (Track) async throws -> (red: UInt8, green: UInt8, blue: UInt8)
+    public let previewBackgroundColor: PreviewBackgroundHandler
 
     /// file URL ti display the in the theme picker list
     ///
@@ -20,7 +23,7 @@ public struct ThemePreview {
     public let iconImage: NSImage
     
     public init(themePreview: @escaping (Track) -> AnyView,
-                previewBackgroundColor: @escaping (Track) async throws -> (red: UInt8, green: UInt8, blue: UInt8),
+                previewBackgroundColor: @escaping PreviewBackgroundHandler,
                 iconImage: NSImage) {
         self.themePreview = themePreview
         self.previewBackgroundColor = previewBackgroundColor
