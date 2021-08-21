@@ -14,7 +14,7 @@ public protocol Theme {
 
     var preview: ThemePreview { get }
 
-    var app: NepTunes? { get }
+    var app: NepTunes? { get set }
 
     init()
 
