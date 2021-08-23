@@ -26,7 +26,7 @@ public struct ThemePreview {
     
     public init(themePreview: @escaping (Track) -> AnyView,
                 previewBackgroundColor: @escaping PreviewBackgroundHandler,
-                preferencesView: @escaping () -> AnyView?,
+                preferencesView: @autoclosure @escaping () -> AnyView?,
                 iconImage: NSImage) {
         self.themePreview = themePreview
         self.previewBackgroundColor = previewBackgroundColor

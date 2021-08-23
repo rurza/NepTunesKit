@@ -8,7 +8,7 @@
 import SwiftUI
 
 public protocol Player {
-    var volume: Double { get set }
+    var volume: Int { get set }
     var playbackStatus: PlayerPlaybackState { get }
     var currentTrack: Track? { get }
     func nextTrack()
