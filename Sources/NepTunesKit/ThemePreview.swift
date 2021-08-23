@@ -17,6 +17,8 @@ public struct ThemePreview {
 
     public let previewBackgroundColor: PreviewBackgroundHandler
 
+    public let preferencesView: () -> AnyView?
+
     /// file URL ti display the in the theme picker list
     ///
     /// it will be displayed in the rounded rectangle
@@ -24,9 +26,11 @@ public struct ThemePreview {
     
     public init(themePreview: @escaping (Track) -> AnyView,
                 previewBackgroundColor: @escaping PreviewBackgroundHandler,
+                preferencesView: @escaping () -> AnyView?,
                 iconImage: NSImage) {
         self.themePreview = themePreview
         self.previewBackgroundColor = previewBackgroundColor
+        self.preferencesView = preferencesView
         self.iconImage = iconImage
     }
     
