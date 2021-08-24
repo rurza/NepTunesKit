@@ -14,4 +14,5 @@ public protocol Player {
     func nextTrack()
     func backTrack()
     func playPause()
+    func bringForward()
 }
