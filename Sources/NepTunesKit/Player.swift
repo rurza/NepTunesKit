@@ -15,5 +15,5 @@ public protocol Player {
     func backTrack()
     func playPause()
     func bringForward()
-    func toggleLikeTrack(_ track: Track)
+    func toggleLikeTrack()
 }

@@ -14,13 +14,15 @@ public struct Track: Equatable {
     public let album: String?
     public let albumArtist: String?
     public let artworkData: Data?
+    public let isLiked: Bool
 
-    public init(title: String, artist: String, album: String?, albumArtist: String?, artworkData: Data?) {
+    public init(title: String, artist: String, album: String?, albumArtist: String?, artworkData: Data?, isLiked: Bool) {
         self.title = title
         self.artist = artist
         self.album = album
         self.albumArtist = albumArtist
         self.artworkData = artworkData
+        self.isLiked = isLiked
     }
 
 }
