@@ -18,7 +18,7 @@ public protocol Theme {
 
     init()
 
-    /// will be called by the app when it's set
+    /// will be called by the app when the theme is set
     /// ideally you would init the window lazily, until it's actually needed
     /// it should contain the working theme
     ///
