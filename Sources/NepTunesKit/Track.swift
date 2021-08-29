@@ -7,26 +7,52 @@
 
 import Foundation
 
-public struct Track: Equatable {
+public protocol Track {
+    var title: String { get }
+    var artist: String { get }
+    var album: String? { get }
+    var albumArtist: String? { get }
+    var artworkData: Data? { get }
+    var isLiked: Bool? { get set }
+    var url: URL? { get }
+    var duration: TimeInterval? { get }
 
+    func isTheSameTrackAs(_ track: Track?) -> Bool 
+}
+
+public extension Track {
+    func eraseToAnyTrack() -> AnyTrack {
+        AnyTrack(title: title,
+                 artist: artist,
+                 album: album,
+                 albumArtist: albumArtist,
+                 artworkData: artworkData,
+                 isLiked: isLiked,
+                 url: url,
+                 duration: duration)
+    }
+}
+
+public struct AnyTrack: Track, Equatable {
     public let title: String
     public let artist: String
     public let album: String?
     public let albumArtist: String?
-    public let artworkData: Data?
-    public let isLiked: Bool?
-    public let url: URL?
+    public var artworkData: Data?
+    public var isLiked: Bool?
+    public var url: URL?
+    public var duration: TimeInterval?
+    public func isTheSameTrackAs(_ track: Track?) -> Bool {
+        self.artist == track?.artist && self.title == track?.title && self.album == track?.album
+    }
+}
 
-    public init(title: String, artist: String, album: String?,
-                albumArtist: String?, artworkData: Data?,
-                isLiked: Bool?, url: URL?) {
+public extension AnyTrack {
+    init(title: String, artist: String, album: String, albumArtist: String?, artworkData: Data?) {
         self.title = title
         self.artist = artist
         self.album = album
         self.albumArtist = albumArtist
         self.artworkData = artworkData
-        self.isLiked = isLiked
-        self.url = url
     }
-
 }

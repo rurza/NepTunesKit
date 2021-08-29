@@ -18,7 +18,7 @@ public protocol Player {
     func backTrack()
     func playPause()
     func bringForward()
-    func toggleLikeTrack()
+    func toggleLikeTrack() -> Bool?
 }
 
 public enum RepeatMode {

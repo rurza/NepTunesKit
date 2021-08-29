@@ -9,7 +9,6 @@ import Cocoa
 import SwiftUI
 
 public protocol Theme {
-
     var info: ThemeInfo { get }
 
     var preview: ThemePreview { get }
