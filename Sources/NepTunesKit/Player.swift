@@ -9,7 +9,7 @@ import SwiftUI
 
 public protocol Player {
     var volume: Int { get set }
-    var playbackStatus: PlayerPlaybackState { get }
+    var playbackState: PlayerPlaybackState { get }
     var playerType: PlayerType { get }
     var currentTrack: Track? { get }
     var shuffle: Bool { get set }
