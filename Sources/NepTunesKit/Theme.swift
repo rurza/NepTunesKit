@@ -13,7 +13,7 @@ public protocol Theme {
 
     var preview: ThemePreview { get }
 
-    var player: Player? { get set }
+    var nepTunes: NepTunes? { get set }
 
     init()
 

@@ -1,13 +1,12 @@
 //
-//  Player.swift
-//  
+//  NepTunes.swift
 //
-//  Created by Adam Różyński on 03/08/2021.
+//  Created by Adam Różyński on 29/08/2021.
 //
 
 import Foundation
 
-public protocol Player {
+public protocol NepTunes {
     var volume: Int { get set }
     var playbackState: PlayerPlaybackState { get }
     var playerType: PlayerType { get }
@@ -17,6 +16,7 @@ public protocol Player {
     func nextTrack()
     func backTrack()
     func playPause()
-    // Optional
-    func toggleLikeTrack() -> Bool
+    func bringForward()
+    func toggleLikeTrack()
 }
+
