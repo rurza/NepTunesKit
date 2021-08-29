@@ -31,6 +31,10 @@ public extension Track {
                  url: url,
                  duration: duration)
     }
+
+    func isTheSameTrackAs(_ track: Track?) -> Bool {
+        self.artist == track?.artist && self.title == track?.title && self.album == track?.album
+    }
 }
 
 public struct AnyTrack: Track, Equatable {
@@ -42,9 +46,6 @@ public struct AnyTrack: Track, Equatable {
     public var isLiked: Bool?
     public var url: URL?
     public var duration: TimeInterval?
-    public func isTheSameTrackAs(_ track: Track?) -> Bool {
-        self.artist == track?.artist && self.title == track?.title && self.album == track?.album
-    }
 }
 
 public extension AnyTrack {
