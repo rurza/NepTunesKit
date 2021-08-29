@@ -48,11 +48,12 @@ public struct AnyTrack: Track, Equatable {
 }
 
 public extension AnyTrack {
-    init(title: String, artist: String, album: String, albumArtist: String?, artworkData: Data?) {
+    init(title: String, artist: String, album: String, albumArtist: String?, artworkData: Data?, duration: TimeInterval?) {
         self.title = title
         self.artist = artist
         self.album = album
         self.albumArtist = albumArtist
         self.artworkData = artworkData
+        self.duration = duration
     }
 }
