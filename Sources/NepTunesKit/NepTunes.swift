@@ -7,16 +7,19 @@
 import Foundation
 
 public protocol NepTunes {
-    var volume: Int { get set }
+    var volume: Int { get }
     var playbackState: PlayerPlaybackState { get }
     var playerType: PlayerType { get }
     var currentTrack: Track? { get }
-    var shuffle: Bool { get set }
-    var repeatMode: RepeatMode { get set }
+    var shuffle: Bool { get }
+    var repeatMode: RepeatMode { get }
     func nextTrack()
     func backTrack()
     func playPause()
     func bringForward()
     func toggleLikeTrack()
+    func toggleShuffleMode()
+    func toggleRepeatMode()
+    func setVolume(_ new: Int)
 }
 

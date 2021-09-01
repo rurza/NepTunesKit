@@ -46,6 +46,12 @@ public struct AnyTrack: Track, Equatable {
     public var isLiked: Bool?
     public var url: URL?
     public var duration: TimeInterval?
+
+    public static func ==(lhs: Self, rhs: Self) -> Bool {
+        lhs.title == rhs.title && lhs.artist == rhs.artist
+        && lhs.album == rhs.album && lhs.albumArtist == rhs.albumArtist
+        && lhs.artworkData == rhs.artworkData && lhs.duration == rhs.duration
+    }
 }
 
 public extension AnyTrack {

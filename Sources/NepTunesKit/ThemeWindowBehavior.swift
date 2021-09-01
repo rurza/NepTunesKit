@@ -6,10 +6,15 @@
 //
 
 import Foundation
+import SwiftUI
 
-public enum ThemeWindowBehavior {
-    case managedByTheTheme
+public enum ThemeWindowBehavior: Int, CaseIterable, Identifiable, RawRepresentable {
     case stuck
     case above
     case mixed
+    case managedByTheme
+
+    public var id: Self {
+        self
+    }
 }

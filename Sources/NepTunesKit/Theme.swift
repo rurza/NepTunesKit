@@ -8,7 +8,7 @@
 import Cocoa
 import SwiftUI
 
-public protocol Theme {
+public protocol Theme: AnyObject {
     var info: ThemeInfo { get }
 
     var preview: ThemePreview { get }
@@ -16,6 +16,8 @@ public protocol Theme {
     var nepTunes: NepTunes? { get set }
 
     init()
+
+    var defaultThemeWindowBehavior: ThemeWindowBehavior { get }
 
     /// will be called by the app when the theme is set
     /// ideally you would init the window lazily, until it's actually needed

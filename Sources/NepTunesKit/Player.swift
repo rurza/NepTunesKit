@@ -12,11 +12,13 @@ public protocol Player {
     var playbackState: PlayerPlaybackState { get }
     var playerType: PlayerType { get }
     var currentTrack: Track? { get }
-    var shuffle: Bool { get set }
-    var repeatMode: RepeatMode { get set }
+    var shuffle: Bool { get }
+    var repeatMode: RepeatMode { get }
     func nextTrack()
     func backTrack()
     func playPause()
+    func toggleShuffle() -> Bool
+    func toggleRepeatMode() -> RepeatMode
     // Optional
     func toggleLikeTrack() -> Bool
 }
