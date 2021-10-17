@@ -5,6 +5,7 @@
 //
 
 import Foundation
+import AppKit
 
 public struct NepTunesPlayerState {
     public let playbackState: PlayerPlaybackState
@@ -24,8 +25,7 @@ public struct NepTunesPlayerState {
     }
 }
 
-public protocol NepTunes {
-    var playerState: NepTunesPlayerState? { get }
+public protocol NepTunesController: AnyObject {
     func nextTrack()
     func backTrack()
     func playPause()
