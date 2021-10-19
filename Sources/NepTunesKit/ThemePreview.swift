@@ -8,7 +8,6 @@
 import Cocoa
 import SwiftUI
 
-//public typealias ColorRGBDescription = (red: UInt8, green: UInt8, blue: UInt8)
 public typealias PreviewBackgroundHandler = (Track) async throws -> SwiftUI.Color
 
 public struct ThemePreview {

@@ -6,11 +6,11 @@
 
 import Cocoa
 
-public class ThemeWindow: NSWindow {
+open class ThemeWindow: NSWindow {
 
     private let windowIdentifier: String
 
-    init(identifier: String) {
+    public init(identifier: String) {
         self.windowIdentifier = identifier
         super.init(contentRect: .zero, styleMask: [.borderless], backing: .buffered, defer: true)
         isMovableByWindowBackground = true
@@ -20,6 +20,7 @@ public class ThemeWindow: NSWindow {
         titleVisibility = .hidden
         backgroundColor = .clear
         canHide = false
+        isReleasedWhenClosed = false
         NotificationCenter.default.addObserver(self, selector: #selector(didMove(_:)), name: Self.didMoveNotification, object: self)
         if let frame = UserDefaults.standard.object(forKey: identifier) as? String {
             setFrame(NSRectFromString(frame), display: false)
@@ -31,10 +32,6 @@ public class ThemeWindow: NSWindow {
     @objc func didMove(_ sender: Notification) {
         let window = sender.object as! NSWindow
         UserDefaults.standard.set(NSStringFromRect(window.frame), forKey: windowIdentifier)
-    }
-
-    deinit {
-        NotificationCenter.default.removeObserver(self)
     }
 
 }

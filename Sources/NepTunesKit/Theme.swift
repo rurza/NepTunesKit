@@ -8,8 +8,6 @@
 import Cocoa
 import SwiftUI
 
-
-
 open class Theme {
     public var nepTunesController: NepTunesController?
 
