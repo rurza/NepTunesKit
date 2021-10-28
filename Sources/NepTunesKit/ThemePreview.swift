@@ -8,13 +8,11 @@
 import Cocoa
 import SwiftUI
 
-public typealias PreviewBackgroundHandler = (Track) async throws -> SwiftUI.Color
-
 public struct ThemePreview {
 
     public let themePreview: (Track) -> AnyView
 
-    public let previewBackgroundColor: (Track) async throws -> SwiftUI.Color
+    public let previewBackgroundImage: (Track) async throws -> SwiftUI.Image
 
     public let preferencesView: () -> AnyView?
 
@@ -24,11 +22,11 @@ public struct ThemePreview {
     public let iconImage: NSImage
     
     public init(themePreview: @escaping (Track) -> AnyView,
-                previewBackgroundColor: @escaping (Track) async throws -> SwiftUI.Color,
+                previewBackgroundImage: @escaping (Track) async throws -> SwiftUI.Image,
                 preferencesView: @autoclosure @escaping () -> AnyView?,
                 iconImage: NSImage) {
         self.themePreview = themePreview
-        self.previewBackgroundColor = previewBackgroundColor
+        self.previewBackgroundImage = previewBackgroundImage
         self.preferencesView = preferencesView
         self.iconImage = iconImage
     }

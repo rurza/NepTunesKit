@@ -34,4 +34,28 @@ open class ThemeWindow: NSWindow {
         UserDefaults.standard.set(NSStringFromRect(window.frame), forKey: windowIdentifier)
     }
 
+    private lazy var _contentView = ContentView()
+
+    open override var contentView: NSView? {
+        set {
+            _contentView.subviews.forEach { $0.removeFromSuperview() }
+            if let contentView = newValue {
+                _contentView.addSubview(contentView)
+                contentView.translatesAutoresizingMaskIntoConstraints = false
+                contentView.leadingAnchor.constraint(equalTo: _contentView.leadingAnchor).isActive = true
+                contentView.topAnchor.constraint(equalTo: _contentView.topAnchor).isActive = true
+                contentView.trailingAnchor.constraint(equalTo: _contentView.trailingAnchor).isActive = true
+                contentView.bottomAnchor.constraint(equalTo: _contentView.bottomAnchor).isActive = true
+            }
+            super.contentView = _contentView
+        }
+        get {
+            _contentView.subviews.first
+        }
+    }
+
+}
+
+public class ContentView: NSView {
+
 }
