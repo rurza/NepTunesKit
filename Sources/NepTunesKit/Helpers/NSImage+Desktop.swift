@@ -11,6 +11,7 @@ import Cocoa
 public extension NSImage {
     static func desktopPictures() -> [NSImage] {
         let info = CGWindowListCopyWindowInfo(.optionOnScreenOnly, kCGNullWindowID) as? [[ String : Any]]
+        let scale = NSScreen.main?.backingScaleFactor ?? 1
         var images = [NSImage]()
         for window in info! {
             // we need windows owned by Dock
@@ -25,8 +26,13 @@ public extension NSImage {
             }
             // this belongs to a screen
             let index = window["kCGWindowNumber"] as! CGWindowID
-            let cgImage = CGWindowListCreateImage(CGRect.infinite, CGWindowListOption(arrayLiteral: CGWindowListOption.optionIncludingWindow), index, CGWindowImageOption.nominalResolution)
-            images.append(NSImage(cgImage: cgImage!, size: NSMakeSize(CGFloat(cgImage!.width), CGFloat(cgImage!.height))))
+            if let cgImage = CGWindowListCreateImage(CGRect.infinite, CGWindowListOption(arrayLiteral: CGWindowListOption.optionIncludingWindow), index, CGWindowImageOption.bestResolution) {
+                let width = CGFloat(cgImage.width) / scale
+                let height = CGFloat(cgImage.height) / scale
+                let size = NSMakeSize(width, height)
+                let nsImage = NSImage(cgImage: cgImage, size: size)
+                images.append(nsImage)
+            }
         }
         // return the array of Desktop images
         return images

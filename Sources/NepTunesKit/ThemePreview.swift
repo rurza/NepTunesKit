@@ -12,7 +12,7 @@ public struct ThemePreview {
 
     public let themePreview: (Track) -> AnyView
 
-    public let previewBackgroundImage: (Track) async throws -> SwiftUI.Image
+    public let previewBackgroundImage: (Track) async throws -> NSImage
 
     public let preferencesView: () -> AnyView?
 
@@ -22,7 +22,7 @@ public struct ThemePreview {
     public let iconImage: NSImage
     
     public init(themePreview: @escaping (Track) -> AnyView,
-                previewBackgroundImage: @escaping (Track) async throws -> SwiftUI.Image,
+                previewBackgroundImage: @escaping (Track) async throws -> NSImage,
                 preferencesView: @autoclosure @escaping () -> AnyView?,
                 iconImage: NSImage) {
         self.themePreview = themePreview
