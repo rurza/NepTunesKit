@@ -10,22 +10,22 @@ import Cocoa
 // ref: https://stackoverflow.com/questions/51879210/how-to-set-desktop-image-to-nswindow-programmatically-objective-c?noredirect=1&lq=1
 public extension NSImage {
     static func desktopPictures() -> [NSImage] {
-        let info = CGWindowListCopyWindowInfo(.optionOnScreenOnly, kCGNullWindowID) as? [[ String : Any]]
+        guard let info = CGWindowListCopyWindowInfo(.optionOnScreenOnly, kCGNullWindowID) as? [[ String : Any]] else { return [] }
         let scale = NSScreen.main?.backingScaleFactor ?? 1
         var images = [NSImage]()
-        for window in info! {
+        for window in info {
             // we need windows owned by Dock
-            let owner = window["kCGWindowOwnerName"] as! String
+            guard let owner = window["kCGWindowOwnerName"] as? String else { continue }
             if owner != "Dock" {
                 continue
             }
             // we need windows named like "Desktop Picture %"
-            let name = window["kCGWindowName"] as! String
+            guard let name = window["kCGWindowName"] as? String else { continue }
             if !name.hasPrefix("Desktop Picture") {
                 continue
             }
             // this belongs to a screen
-            let index = window["kCGWindowNumber"] as! CGWindowID
+            guard let index = window["kCGWindowNumber"] as? CGWindowID else { continue }
             if let cgImage = CGWindowListCreateImage(CGRect.infinite, CGWindowListOption(arrayLiteral: CGWindowListOption.optionIncludingWindow), index, CGWindowImageOption.bestResolution) {
                 let width = CGFloat(cgImage.width) / scale
                 let height = CGFloat(cgImage.height) / scale
