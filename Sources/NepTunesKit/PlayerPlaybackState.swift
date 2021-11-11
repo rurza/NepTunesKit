@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum PlayerPlaybackState {
+public enum PlayerPlaybackState: Codable {
     case unknown
     case stopped
     case playing

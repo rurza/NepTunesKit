@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-public enum ThemeWindowBehavior: Int, CaseIterable, Identifiable, RawRepresentable {
+public enum ThemeWindowBehavior: Int, CaseIterable, Identifiable, RawRepresentable, Codable {
     case stuck
     case above
     case managedByTheme

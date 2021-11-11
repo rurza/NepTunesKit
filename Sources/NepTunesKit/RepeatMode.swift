@@ -6,7 +6,7 @@
 
 import Foundation
 
-public enum RepeatMode {
+public enum RepeatMode: Codable {
     case all
     case one
     case off
