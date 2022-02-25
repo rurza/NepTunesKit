@@ -13,7 +13,7 @@ public protocol Track {
     var album: String? { get }
     var albumArtist: String? { get }
     var artworkData: Data? { get }
-    var isLiked: Bool? { get set }
+    var isLoved: Bool? { get set }
     var duration: TimeInterval? { get }
 
     func isTheSameTrackAs(_ track: Track?) -> Bool 
@@ -26,7 +26,7 @@ public extension Track {
                  album: album,
                  albumArtist: albumArtist,
                  artworkData: artworkData,
-                 isLiked: isLiked,
+                 isLoved: isLoved,
                  duration: duration)
     }
 
@@ -41,7 +41,7 @@ public struct AnyTrack: Track, Equatable {
     public let album: String?
     public let albumArtist: String?
     public var artworkData: Data?
-    public var isLiked: Bool?
+    public var isLoved: Bool?
     public var duration: TimeInterval?
 
     public static func ==(lhs: Self, rhs: Self) -> Bool {
