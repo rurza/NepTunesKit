@@ -9,10 +9,10 @@
 #define MPIPlayerPlaybackState_h
 
 typedef NS_ENUM(NSUInteger, MPIPlayerPlaybackState) {
-    PlayerPlaybackStateUnknown,
-    PlayerPlaybackStateStopped,
-    PlayerPlaybackStatePlaying,
-    PlayerPlaybackStatePaused,
+    MPIPlayerPlaybackStateUnknown,
+    MPIPlayerPlaybackStateStopped,
+    MPIPlayerPlaybackStatePlaying,
+    MPIPlayerPlaybackStatePaused,
 };
 
 #endif /* MPIPlayerPlaybackState_h */

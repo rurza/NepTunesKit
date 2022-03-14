@@ -5,6 +5,7 @@
 //  Created by Adam on 14/03/2022.
 //
 @import Foundation;
+#import "MPIPlayerPlaybackState.h"
 
 NSString *const kMPIWidgetIdentifier = @"YL78V8PY6H.pl.micropixels.NepTunes.Widget";
 
@@ -12,7 +13,7 @@ NSString *const kMPIWidgetIdentifier = @"YL78V8PY6H.pl.micropixels.NepTunes.Widg
 @protocol MPIWidgetService <NSObject>
 
 - (void)trackArtworkDidChange:(NSImage *)image;
-- (void)playerStateDidChange:(PlayerPlaybackState *)state
+- (void)playerStateDidChange:(MPIPlayerPlaybackState *)state;
 
 @end
 
@@ -26,6 +27,6 @@ NSString *const kMPIWidgetIdentifier = @"YL78V8PY6H.pl.micropixels.NepTunes.Widg
 - (void)toggleLikeTrack;
 - (void)toggleShuffleMode;
 - (void)toggleRepeatMode;
-- (void)setVolume:(Int)volume;
+- (void)setVolume:(NSUInteger)volume;
 
 @end
