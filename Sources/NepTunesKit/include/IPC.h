@@ -9,7 +9,6 @@
 
 NSString *const kMPIWidgetIdentifier = @"YL78V8PY6H.pl.micropixels.NepTunes.Widget";
 
-
 @protocol MPIWidgetService <NSObject>
 
 - (void)trackArtworkDidChange:(NSImage *)image;
@@ -17,6 +16,7 @@ NSString *const kMPIWidgetIdentifier = @"YL78V8PY6H.pl.micropixels.NepTunes.Widg
 
 @end
 
+// ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 @protocol MPIWidgetApp <NSObject>
 

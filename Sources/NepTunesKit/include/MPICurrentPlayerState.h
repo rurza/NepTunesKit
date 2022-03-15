@@ -5,7 +5,7 @@
 //  Created by Adam on 14/03/2022.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 #import "MPIPlayerPlaybackState.h"
 #import "MPITrack.h"
 #import "MPIPlayerType.h"
@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) MPIPlayerPlaybackState    playbackState;
 @property (nonatomic) BOOL                      shuffle;
 @property (nonatomic) NSUInteger                volume;
-@property (nonatomic) id<MPITrack>              currentTrack;
+@property (nonatomic, nullable) id<MPITrack>    currentTrack;
 
 @end
 

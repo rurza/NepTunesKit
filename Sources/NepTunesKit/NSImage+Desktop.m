@@ -9,7 +9,7 @@
 
 @implementation NSImage (Desktop)
 
-+ (NSArray<NSImage *> *)desktopPictures {
++ (NSArray<NSImage *> * _Nonnull)desktopPictures {
     CFArrayRef infoRef = CGWindowListCopyWindowInfo(kCGWindowListOptionOnScreenOnly, kCGNullWindowID);
     NSArray *info = (__bridge NSArray *)infoRef;
     if (info == nil) {

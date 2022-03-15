@@ -5,9 +5,11 @@
 //  Created by Adam on 14/03/2022.
 //
 
-#import <Cocoa/Cocoa.h>
+@import Cocoa;
 
 @interface NSImage (Desktop)
+
++ (NSArray<NSImage *> * _Nonnull)desktopPictures;
 
 @end
 

@@ -13,6 +13,6 @@ typedef NS_ENUM(NSUInteger, MPIPlayerPlaybackState) {
     MPIPlayerPlaybackStateStopped,
     MPIPlayerPlaybackStatePlaying,
     MPIPlayerPlaybackStatePaused,
-};
+} NS_SWIFT_NAME(PlayerPlaybackState);
 
 #endif /* MPIPlayerPlaybackState_h */

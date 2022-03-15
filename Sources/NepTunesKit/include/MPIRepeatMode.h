@@ -12,6 +12,6 @@ typedef NS_ENUM(NSUInteger, MPIRepeatMode) {
     MPIRepeatModeAll,
     MPIRepeatModeOne,
     MPIRepeatModeOff,
-};
+} NS_SWIFT_NAME(RepeatMode);
 
 #endif /* MPIRepeatMode_h */
