@@ -25,6 +25,7 @@
     self.name = name;
     self.identifier = identifier;
     self.author = author;
+    return self;
 }
 
 @end

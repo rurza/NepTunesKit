@@ -26,6 +26,7 @@
     self.albumArtist = track.albumArtist;
     self.artworkData = track.artworkData;
     self.duration = track.duration;
+    return self;
 }
 
 - (BOOL)isTheSameTrackAs:(id<MPITrack> _Nonnull)track {

@@ -15,12 +15,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MPICurrentPlayerState : NSObject
 
-@property (nonatomic) MPIRepeatMode             repeatMode;
-@property (nonatomic) MPIPlayerType             playerType;
-@property (nonatomic) MPIPlayerPlaybackState    playbackState;
-@property (nonatomic) BOOL                      shuffle;
-@property (nonatomic) NSUInteger                volume;
-@property (nonatomic, nullable) id<MPITrack>    currentTrack;
+@property (nonatomic, readonly) MPIRepeatMode             repeatMode;
+@property (nonatomic, readonly) MPIPlayerType             playerType;
+@property (nonatomic, readonly) MPIPlayerPlaybackState    playbackState;
+@property (nonatomic, readonly) BOOL                      shuffle;
+@property (nonatomic, readonly) NSUInteger                volume;
+@property (nonatomic, readonly, nullable) id<MPITrack>    currentTrack;
+
+- (instancetype)initWithRepeatMode:(MPIRepeatMode)repeatMode
+                        playerType:(MPIPlayerType)playerType
+                     playbackState:(MPIPlayerPlaybackState)playbackState
+                           shuffle:(BOOL)shuffle
+                            volume:(NSUInteger)volume
+                      currentTrack:(id<MPITrack> _Nullable)currentTrack;
 
 @end
 
