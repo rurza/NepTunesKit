@@ -12,6 +12,7 @@
 @class MPIThemeInfo;
 @class MPIThemeWindow;
 @class MPICurrentPlayerState;
+@class MPIThemePreview;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,6 +30,8 @@ NS_SWIFT_NAME(Theme)
 
 /// by default will return a new `MPIThemeWindow` instance with the identifier from the `MPIThemeInfo`
 - (MPIThemeWindow *)themeWindow;
+
+- (MPIThemePreview *)preview;
 
 /// the default implementation does nothing
 /// @param newState containg info about the app and the current trakc (which can be nil)

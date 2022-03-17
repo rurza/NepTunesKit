@@ -17,6 +17,12 @@
                                  userInfo:nil];
 }
 
+- (MPIThemePreview *)preview {
+    @throw [NSException exceptionWithName:@"Implement this method in your theme"
+                                   reason:@""
+                                 userInfo:nil];
+}
+
 - (void)stateDidChange:(MPICurrentPlayerState *)newState { }
 
 - (MPIThemeWindowBehavior)defaultThemeWindowBehavior {

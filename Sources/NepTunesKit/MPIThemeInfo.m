@@ -28,4 +28,8 @@
     return self;
 }
 
+- (NSUInteger)hash {
+    return self.identifier.hash;
+}
+
 @end
