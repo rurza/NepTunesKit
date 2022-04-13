@@ -13,14 +13,25 @@ open class Theme {
 
     public required init() { }
 
-    /// override, otherwise it'll crash the app
+    /// override without calling super, otherwise it'll crash the app
     open func info() -> ThemeInfo {
-        fatalError()
+//        assert(false, "Please override method `info` without calling super")
+        return ThemeInfo(name: "Theme", version: UInt.max, identifier: "com.example.NepTunesTheme", author: "Homer")
     }
 
-    /// override, otherwise it'll crash the app
+    /// override without calling super, otherwise it'll crash the app
     open func preview() -> ThemePreview {
-        fatalError()
+//        assert(false, "Please override method `preview` without calling super")
+        return ThemePreview(
+            themePreview: {
+                AnyView(Text($0.title))
+            },
+            previewBackgroundImage: { track in
+                NSImage(color: .black)
+            },
+            preferencesView: nil,
+            iconImage: NSImage(color: .systemCyan)
+        )
     }
 
     open func themeWindow() -> ThemeWindow {
