@@ -9,6 +9,7 @@ import Cocoa
 open class ThemeWindow: NSWindow {
 
     private let windowIdentifier: String
+    public static let rightMouseDown = NSNotification.Name(rawValue: "com.micropixels.NepTunesKit.rightMouseDown")
 
     public init(identifier: String) {
         self.windowIdentifier = identifier
@@ -56,6 +57,12 @@ open class ThemeWindow: NSWindow {
 
 }
 
-public class ContentView: NSView {
-
+private class ContentView: NSView {
+    override func rightMouseDown(with event: NSEvent) {
+        super.rightMouseDown(with: event)
+        NotificationCenter.default.post(
+            name: ThemeWindow.rightMouseDown,
+            object: self.window
+        )
+    }
 }

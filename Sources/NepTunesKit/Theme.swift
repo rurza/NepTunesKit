@@ -8,7 +8,7 @@
 import Cocoa
 import SwiftUI
 
-open class Theme {
+open class Theme: Equatable {
     public var nepTunesController: NepTunesController?
 
     public required init() { }
@@ -45,4 +45,8 @@ open class Theme {
 
     open func stateDidChange(_ state: NepTunesPlayerState?) { }
 
+    public static func ==(lhs: Theme, rhs: Theme) -> Bool {
+        lhs.info().identifier == rhs.info().identifier && lhs.info().name == rhs.info().name
+    }
+    
 }
