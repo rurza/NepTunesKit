@@ -10,8 +10,11 @@ import SwiftUI
 
 open class Theme: Equatable {
     public var nepTunesController: NepTunesController?
-
-    public required init() { }
+    public let url: URL
+    
+    public required init(url: URL) {
+        self.url = url
+    }
 
     /// override without calling super, otherwise it'll crash the app
     open func info() -> ThemeInfo {
