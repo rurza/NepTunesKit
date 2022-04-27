@@ -8,33 +8,40 @@
 import Cocoa
 import SwiftUI
 
-open class Theme: Equatable {
-    public var nepTunesController: NepTunesController?
+open class Theme<App: NepTunes>: Equatable {
+    public var app: App?
     public let url: URL
+
+    open var hasPreferences = false
     
     public required init(url: URL) {
         self.url = url
     }
-
     /// override without calling super, otherwise it'll crash the app
+    /// - Returns: info that will be used to display info about plugin
     open func info() -> ThemeInfo {
-//        assert(false, "Please override method `info` without calling super")
-        return ThemeInfo(name: "Theme", version: UInt.max, identifier: "com.example.NepTunesTheme", author: "Homer")
+        assertionFailure("Please override method `info` without calling super")
+        return ThemeInfo(
+            name: "Theme",
+            version: UInt.max,
+            identifier: "com.example.NepTunesTheme",
+            author: "Homer",
+            iconFileURL: URL(fileURLWithPath: "/")
+        )
     }
 
-    /// override without calling super, otherwise it'll crash the app
-    open func preview() -> ThemePreview {
-//        assert(false, "Please override method `preview` without calling super")
-        return ThemePreview(
-            themePreview: {
-                AnyView(Text($0.title))
-            },
-            previewBackgroundImage: { track in
-                NSImage(color: .black)
-            },
-            preferencesView: nil,
-            iconImage: NSImage(color: .systemCyan)
-        )
+    /// Please override this method
+    open func themePreview(for track: Track) -> some View {
+        Text(track.title).foregroundColor(.white)
+    }
+
+    /// Please override this method if your theme has preferences (please remember to set `hasPreferences` to true
+    open func preferencesView() -> some View {
+        EmptyView()
+    }
+
+    open func previewBackgroundImage(for track: Track) async throws -> NSImage {
+        NSImage(color: .black)
     }
 
     open func themeWindow() -> ThemeWindow {
@@ -45,8 +52,6 @@ open class Theme: Equatable {
     open func defaultThemeWindowBehavior() -> ThemeWindowBehavior {
         return .stuck
     }
-
-    open func stateDidChange(_ state: NepTunesPlayerState?) { }
 
     public static func ==(lhs: Theme, rhs: Theme) -> Bool {
         lhs.info().identifier == rhs.info().identifier && lhs.info().name == rhs.info().name

@@ -11,7 +11,7 @@ import SwiftUI
 public enum ThemeWindowBehavior: Int, CaseIterable, Identifiable, RawRepresentable, Codable {
     case stuck
     case above
-    case managedByTheme
+    case normal
 
     public var id: Self {
         self

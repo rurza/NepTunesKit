@@ -7,25 +7,9 @@
 import Foundation
 import AppKit
 
-public struct NepTunesPlayerState {
-    public let playbackState: PlayerPlaybackState
-    public let playerType: PlayerType
-    public let currentTrack: Track?
-    public let shuffle: Bool
-    public let volume: Int
-    public let repeatMode: RepeatMode
+public protocol NepTunes: ObservableObject {
+    var state: NepTunesPlayerState { get }
 
-    public init(playbackState: PlayerPlaybackState, playerType: PlayerType, currentTrack: Track? = nil, shuffle: Bool, volume: Int, repeatMode: RepeatMode) {
-        self.playbackState = playbackState
-        self.playerType = playerType
-        self.currentTrack = currentTrack
-        self.shuffle = shuffle
-        self.volume = volume
-        self.repeatMode = repeatMode
-    }
-}
-
-public protocol NepTunesController: AnyObject {
     func nextTrack()
     func backTrack()
     func playPause()
@@ -36,3 +20,27 @@ public protocol NepTunesController: AnyObject {
     func setVolume(_ new: Int)
 }
 
+public struct NepTunesPlayerState {
+    public let playbackState: PlayerPlaybackState
+    public let playerType: PlayerType
+    public let currentTrack: Track?
+    public let shuffle: Bool
+    public let volume: Int
+    public let repeatMode: RepeatMode
+
+    public init(
+        playbackState: PlayerPlaybackState,
+        playerType: PlayerType,
+        currentTrack: Track? = nil,
+        shuffle: Bool,
+        volume: Int,
+        repeatMode: RepeatMode
+    ) {
+        self.playbackState = playbackState
+        self.playerType = playerType
+        self.currentTrack = currentTrack
+        self.shuffle = shuffle
+        self.volume = volume
+        self.repeatMode = repeatMode
+    }
+}
