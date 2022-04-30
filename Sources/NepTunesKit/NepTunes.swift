@@ -7,17 +7,19 @@
 import Foundation
 import AppKit
 
-public protocol NepTunes: ObservableObject {
-    var state: NepTunesPlayerState { get }
+open class NepTunes: ObservableObject {
+    @Published public var state: NepTunesPlayerState?
 
-    func nextTrack()
-    func backTrack()
-    func playPause()
-    func bringForward()
-    func toggleLikeTrack()
-    func toggleShuffleMode()
-    func toggleRepeatMode()
-    func setVolume(_ new: Int)
+    public init() { }
+
+    open func nextTrack() { }
+    open func backTrack() { }
+    open func playPause() { }
+    open func bringForward() { }
+    open func toggleLikeTrack() { }
+    open func toggleShuffleMode() { }
+    open func toggleRepeatMode() { }
+    open func setVolume(_ new: Int) { }
 }
 
 public struct NepTunesPlayerState {

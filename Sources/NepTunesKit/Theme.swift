@@ -8,44 +8,44 @@
 import Cocoa
 import SwiftUI
 
-open class Theme<App: NepTunes>: Equatable {
-    public var app: App?
+open class Theme: Equatable, Identifiable {
+    public let app: NepTunes
     public let url: URL
-
-    open var hasPreferences = false
     
-    public required init(url: URL) {
+    /// info that will be used to display info about plugin
+    /// override it
+    open var info: ThemeInfo
+
+    public required init(url: URL, app: NepTunes) {
         self.url = url
-    }
-    /// override without calling super, otherwise it'll crash the app
-    /// - Returns: info that will be used to display info about plugin
-    open func info() -> ThemeInfo {
-        assertionFailure("Please override method `info` without calling super")
-        return ThemeInfo(
-            name: "Theme",
-            version: UInt.max,
-            identifier: "com.example.NepTunesTheme",
-            author: "Homer",
-            iconFileURL: URL(fileURLWithPath: "/")
-        )
+        self.app = app
+        self.info = ThemeInfo(name: "Theme",
+                              version: UInt.max,
+                              identifier: "com.example.NepTunesTheme",
+                              author: "Homer",
+                              iconFileURL: URL(fileURLWithPath: "/"))
     }
 
     /// Please override this method
-    open func themePreview(for track: Track) -> some View {
-        Text(track.title).foregroundColor(.white)
+    open func themePreview() -> AnyView {
+        AnyView(
+            Text("Preview").foregroundColor(.white)
+        )
     }
 
     /// Please override this method if your theme has preferences (please remember to set `hasPreferences` to true
-    open func preferencesView() -> some View {
-        EmptyView()
+    open func preferencesView() -> AnyView? {
+        return nil
     }
 
-    open func previewBackgroundImage(for track: Track) async throws -> NSImage {
-        NSImage(color: .black)
+    open func previewBackgroundView() -> AnyView {
+        AnyView(
+            Color.black
+        )
     }
 
     open func themeWindow() -> ThemeWindow {
-        let window = ThemeWindow(identifier: info().identifier)
+        let window = ThemeWindow(identifier: info.identifier)
         return window
     }
 
@@ -54,7 +54,8 @@ open class Theme<App: NepTunes>: Equatable {
     }
 
     public static func ==(lhs: Theme, rhs: Theme) -> Bool {
-        lhs.info().identifier == rhs.info().identifier && lhs.info().name == rhs.info().name
+        lhs.info.identifier == rhs.info.identifier && lhs.info.name == rhs.info.name
     }
-    
+
+    public var id: String { info.identifier }
 }
