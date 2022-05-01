@@ -22,10 +22,10 @@ open class NepTunes: ObservableObject {
     open func setVolume(_ new: Int) { }
 }
 
-public struct NepTunesPlayerState {
+public struct NepTunesPlayerState: Equatable {
     public let playbackState: PlayerPlaybackState
     public let playerType: PlayerType
-    public let currentTrack: Track?
+    public let currentTrack: AnyTrack?
     public let shuffle: Bool
     public let volume: Int
     public let repeatMode: RepeatMode
@@ -33,7 +33,7 @@ public struct NepTunesPlayerState {
     public init(
         playbackState: PlayerPlaybackState,
         playerType: PlayerType,
-        currentTrack: Track? = nil,
+        currentTrack: AnyTrack? = nil,
         shuffle: Bool,
         volume: Int,
         repeatMode: RepeatMode

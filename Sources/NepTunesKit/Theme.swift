@@ -58,4 +58,16 @@ open class Theme: Equatable, Identifiable {
     }
 
     public var id: String { info.identifier }
+
+    public var previewTrack: AnyTrack {
+        AnyTrack(
+            title: info.name,
+            artist: info.author,
+            album: nil,
+            albumArtist: nil,
+            artworkData: nil,
+            isLoved: false,
+            duration: nil
+        )
+    }
 }
