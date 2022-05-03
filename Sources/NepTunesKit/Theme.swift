@@ -8,7 +8,7 @@
 import Cocoa
 import SwiftUI
 
-open class Theme: Equatable, Identifiable {
+open class Theme: Equatable, Identifiable, Hashable {
     public let app: NepTunes
     public let url: URL
     
@@ -69,5 +69,9 @@ open class Theme: Equatable, Identifiable {
             isLoved: false,
             duration: nil
         )
+    }
+
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 }
