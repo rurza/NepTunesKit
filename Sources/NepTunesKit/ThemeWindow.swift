@@ -26,7 +26,7 @@ open class ThemeWindow: NSWindow {
         if let frame = UserDefaults.standard.object(forKey: identifier) as? String {
             setFrame(NSRectFromString(frame), display: false)
         } else {
-            setFrame(.init(x: 60, y: 60, width: 100, height: 100), display: false)
+            setFrame(Self.defaultFrame, display: false)
         }
     }
 
@@ -53,6 +53,10 @@ open class ThemeWindow: NSWindow {
         get {
             _contentView.subviews.first
         }
+    }
+
+    open class var defaultFrame: NSRect {
+        .init(x: 60, y: 60, width: 100, height: 100)
     }
 
 }

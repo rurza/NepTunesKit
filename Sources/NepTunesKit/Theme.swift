@@ -32,7 +32,8 @@ open class Theme: Equatable, Identifiable, Hashable {
 
     /// Please override this method
     open func themePreview() -> AnyView {
-        AnyView(
+        assertionFailure()
+        return AnyView(
             Text("Preview").foregroundColor(.white)
         )
     }
@@ -63,15 +64,10 @@ open class Theme: Equatable, Identifiable, Hashable {
 
     public var id: String { info.identifier }
 
-    public var previewTrack: AnyTrack {
+    public class var previewTrack: AnyTrack {
         AnyTrack(
-            title: info.name,
-            artist: info.author,
-            album: nil,
-            albumArtist: nil,
-            artworkData: nil,
-            isLoved: false,
-            duration: nil
+            title: "Third Eye",
+            artist: "Tool"
         )
     }
 
