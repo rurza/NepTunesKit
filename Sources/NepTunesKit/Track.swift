@@ -52,7 +52,14 @@ public struct AnyTrack: Track, Equatable {
 }
 
 public extension AnyTrack {
-    init(title: String, artist: String, album: String?, albumArtist: String?, artworkData: Data?, duration: TimeInterval?) {
+    init(
+        title: String,
+        artist: String,
+        album: String? = nil,
+        albumArtist: String? = nil,
+        artworkData: Data? = nil,
+        duration: TimeInterval? = nil
+    ) {
         self.title = title
         self.artist = artist
         self.album = album

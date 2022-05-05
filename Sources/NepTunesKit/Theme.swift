@@ -14,16 +14,20 @@ open class Theme: Equatable, Identifiable, Hashable {
     
     /// info that will be used to display info about plugin
     /// override it
-    open var info: ThemeInfo
+    open var info: ThemeInfo {
+        assertionFailure()
+        return ThemeInfo(
+            name: "Theme",
+            version: UInt.max,
+            identifier: "com.example.NepTunes.Theme",
+            author: "Homer",
+            iconFileURL: URL(fileURLWithPath: "/")
+        )
+    }
 
     public required init(url: URL, app: NepTunes) {
         self.url = url
         self.app = app
-        self.info = ThemeInfo(name: "Theme",
-                              version: UInt.max,
-                              identifier: "com.example.NepTunesTheme",
-                              author: "Homer",
-                              iconFileURL: URL(fileURLWithPath: "/"))
     }
 
     /// Please override this method
