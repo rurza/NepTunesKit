@@ -8,6 +8,9 @@
 import Foundation
 import SwiftUI
 
+/// Represents the behavior of the window that will display the widget
+///
+///
 public enum ThemeWindowBehavior: Int, CaseIterable, Identifiable, RawRepresentable, Codable {
     case stuck
     case above

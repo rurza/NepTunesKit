@@ -8,6 +8,9 @@
 import Cocoa
 import SwiftUI
 
+/// The base abstract class that represents the theme to the app
+///
+/// Subclass this class and override
 open class Theme: Equatable, Identifiable, Hashable {
     public let app: NepTunes
     public let url: URL
@@ -30,7 +33,12 @@ open class Theme: Equatable, Identifiable, Hashable {
         self.app = app
     }
 
-    /// Please override this method
+    /// A view that will be displayed in NepTunes' preferences
+    ///
+    /// Override this method.
+    /// This view will be stacked on the background returned by `previewBackgroundView()`.
+    /// It's recommended to return your theme in it, but keep in mind that the preview can be used even if there is no player running so please provide a default track info that will be displayed in this case. `Theme` class provides an overridable static variable `previewTrack` with title and artist
+    /// - Returns: a view wrapped in AnyView
     open func themePreview() -> AnyView {
         assertionFailure()
         return AnyView(
@@ -38,7 +46,9 @@ open class Theme: Equatable, Identifiable, Hashable {
         )
     }
 
-    /// Please override this method if your theme has preferences (please remember to set `hasPreferences` to true
+    /// A view that will display preferences for this theme
+    ///
+    /// Please override this method if your theme has preferences
     open func preferencesView() -> AnyView? {
         return nil
     }
