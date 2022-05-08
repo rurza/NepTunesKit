@@ -14,8 +14,6 @@ Text
 
 ### Equability
 
-- ``==(lhs:rhs:)``
-- ``hash(into:)``
 
 ### Initialization
 
