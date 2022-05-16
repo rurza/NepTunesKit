@@ -42,9 +42,13 @@ In your project, click the add button and select the Mac app.
 
 ![App target](app-target)
 
-It doesn't matter the exact name of the app or its bundle identidier. Select SwiftUI for the interface.
+You'll need to provide the name and bundle identifier but they don't matter. Select SwiftUI for the interface.
 
 ![App target settings](app-target-name)
 
-In the app's target General settings, find "Framework and Libraries" section and add the NepTunesKit framework. Basically every new file that you'll add to your theme, will have to be added to the app target as well.
+In the app's target General settings, find "Framework and Libraries" section and add the NepTunesKit framework.  
+Every new file that you'll add to your theme, will have to be added to the app target as well. The new target added a new group with some files in it, i.a. `ContentView.swift` and a xcassets group. You can use the former to create your theme view in it and the latter for storing some images that will simulate arwork cover.
 
+### Info.plist
+
+A bundle requires the *Principal class* to be provided in the *Info.plist*
