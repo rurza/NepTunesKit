@@ -74,10 +74,11 @@ open class Theme: Equatable, Identifiable, Hashable {
 
     public var id: String { info.identifier }
 
-    public class var previewTrack: AnyTrack {
+    open class var previewTrack: AnyTrack {
         AnyTrack(
-            title: "Third Eye",
-            artist: "Tool"
+            title: "Title",
+            artist: "Artist",
+            album: "Album"
         )
     }
 
