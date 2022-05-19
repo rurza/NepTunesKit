@@ -20,7 +20,7 @@ Before we'll start coding, let's fix some problems.
 Most of them won't be needed for now. On the other hand they're of type "set up and forget" so let's do them now, so we can focus on coding later:
 
 ### Certificate
-To distribute binaries outside of the App Store, you will need a ‘Developer ID Application’ certificate. If you have not created it yet, you can do so in Xcode or in the Developer Portal. If you already have the certificate but on a different Mac, you need to export it and re-import it on the new Mac.
+To distribute binaries outside of the App Store, you will need a ‘Developer ID Application’ certificate to sign and notarize them. If you have not created it yet, you can do so in the Xcode or in the Developer Portal. If you already have the certificate but on a different Mac, you need to export it and re-import it on the new Mac.
 
 ### Archiving
 Go to target's build settings, find the Deployment section and the "Skip Install" flag. Set it to "No".
@@ -47,8 +47,47 @@ You'll need to provide the name and bundle identifier but they don't matter. Sel
 ![App target settings](app-target-name)
 
 In the app's target General settings, find "Framework and Libraries" section and add the NepTunesKit framework.  
-Every new file that you'll add to your theme, will have to be added to the app target as well. The new target added a new group with some files in it, i.a. `ContentView.swift` and a xcassets group. You can use the former to create your theme view in it and the latter for storing some images that will simulate arwork cover.
+Every new file that you'll add to your theme, will have to be added to the app target as well. The new target added a new group with some files in it, i.a. `ContentView.swift` and a xcassets group. You can use the former to create your theme view in it and the latter for storing some images that will simulate arwork cover image.
+In the app's target General settings, find "Framework and Libraries" section and add the NepTunesKit framework. Basically every new file that you'll add to your theme, will have to be added to the app target as well. The template for the new app will create 
 
 ### Info.plist
 
-A bundle requires the *Principal class* to be provided in the *Info.plist*
+A bundle requires the *Principal class* to be provided in the *Info.plist*. You will need to provide your ``Theme`` subclass name with the module name (aka Bundle name) and a dot between them. So for example, if you named your Bundle *Test* and your ``Theme`` subclass `TestTheme` you should set `Test.TestTheme`.
+
+![Prinicipal class in the Info.plist](principal-class)
+
+### Creating a Theme
+
+Add a new subclass of the ``Theme``. You'll need override variables/methods: \
+- `info: ThemeInfo`
+- `themePreview() -> AnyView `
+- `func themeWindow() -> ThemeWindow`
+
+Check out the documentation of the ``Theme`` for more details.
+
+### Codesigning and notarization
+
+We'll use the new `notarytool` from Xcode 13.
+
+#### Setup
+1. Generate a new App specific password for your developer account. Check out [Apple Support](https://support.apple.com/en-us/HT204397) page.
+2. Save credentials for your Apple ID and team id with the notarytool:\
+`xcrun notarytool store-credentials --apple-id "yourappleid@example.com --team-id "ABCD123456"`
+3. It'll ask you to name your profile. Remember it.
+
+#### Notarizing the app
+1. Archive the bundle
+2. Xcode will automatically open the organizer window with the list of archives. Select the latest and click the *Distribute Content* button and with *Built Products* selected click the *Next* button and save the results.
+![Building the app](build)
+3. Find the *.nepext* file you just saved and zip it with Finder
+4. Open the `Terminal.app` and run the command:
+
+`xcrun notarytool submit path-to-your.zip --keychain-profile the-name-of-profile-from-the-setup --wait`
+
+The result should look more or less like this:
+![Result of notarization from terminal](notary-result)
+
+Check out this [great article](https://scriptingosx.com/2021/07/notarize-a-command-line-tool-with-notarytool/) if you want to know more.
+
+### Publishing you theme
+If you want to be featured on the NepTunes' website with your theme, [contact me](mailto:adam@micropixels.pl).
