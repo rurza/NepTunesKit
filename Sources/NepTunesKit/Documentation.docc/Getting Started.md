@@ -34,7 +34,7 @@ Provide the url [https://github.com/rurza/NepTunesKit/](https://github.com/rurza
 
 ![NepTunesKit dependency](choose-package)
 
-Now select theme's target, go to the General tab, find "Framework and Libraries" section and set the "Embed" to the "Do Not Embed" option. The release version of your theme will link the NepTunesKit that is distributed with the app during runtime.
+Now select theme's target, go to the General tab, find the *"Framework and Libraries"* section and set the *"Embed"* to the *"Do Not Embed"* option. The release version of your theme will link the NepTunesKit that is distributed with the app during runtime.
 
 ### App target
 Because our theme will be written in SwiftUI, we can utilize the SwiftUI Preview which allows us to preview our view without the need of creating a theme, codesigning it and installing it in NepTunes. Unfortunately we can't use the SwiftUI Preview in the bundle target. We can mitigate it by adding a Mac app to our project.
@@ -48,17 +48,17 @@ You'll need to provide the name and bundle identifier but they don't matter. Sel
 
 In the app's target General settings, find "Framework and Libraries" section and add the NepTunesKit framework.  
 Every new file that you'll add to your theme, will have to be added to the app target as well. The new target added a new group with some files in it, i.a. `ContentView.swift` and a xcassets group. You can use the former to create your theme view in it and the latter for storing some images that will simulate arwork cover image.
-In the app's target General settings, find "Framework and Libraries" section and add the NepTunesKit framework. Basically every new file that you'll add to your theme, will have to be added to the app target as well. The template for the new app will create 
+In the app's target General settings, find "Framework and Libraries" section and add the NepTunesKit framework. Basically every new file that you'll add to your theme, will have to be added to the app target as well.
 
 ### Info.plist
 
-A bundle requires the *Principal class* to be provided in the *Info.plist*. You will need to provide your ``Theme`` subclass name with the module name (aka Bundle name) and a dot between them. So for example, if you named your Bundle *Test* and your ``Theme`` subclass `TestTheme` you should set `Test.TestTheme`.
+A bundle requires the __Principal class__ to be provided in the *Info.plist*. You will need to provide your ``Theme`` subclass name with the module name (aka Bundle name) and a dot between them. So for example, if you named your Bundle *Test* and your ``Theme`` subclass *TestTheme* you should set *Test.TestTheme*.
 
 ![Prinicipal class in the Info.plist](principal-class)
 
 ### Creating a Theme
 
-Add a new subclass of the ``Theme``. You'll need override variables/methods: \
+Add a new subclass of the ``Theme``. You'll need override variables/methods:
 - `info: ThemeInfo`
 - `themePreview() -> AnyView `
 - `func themeWindow() -> ThemeWindow`
@@ -67,7 +67,7 @@ Check out the documentation of the ``Theme`` for more details.
 
 ### Codesigning and notarization
 
-We'll use the new `notarytool` from Xcode 13.
+We'll use the new __notarytool__ from Xcode 13.
 
 #### Setup
 1. Generate a new App specific password for your developer account. Check out [Apple Support](https://support.apple.com/en-us/HT204397) page.
