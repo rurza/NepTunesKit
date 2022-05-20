@@ -10,7 +10,9 @@ import SwiftUI
 
 /// The base abstract class that represents the theme to the app
 ///
-/// Subclass this class and override
+/// ``Theme`` is the essential data structure for your Theme.
+/// It's the class you'll have to provide in your bundle's Info.plist and it's
+/// the class that will be initialized by the NepTunes app.
 open class Theme: Equatable, Identifiable, Hashable {
     public let app: NepTunes
     public let url: URL
@@ -37,7 +39,11 @@ open class Theme: Equatable, Identifiable, Hashable {
     ///
     /// Override this method.
     /// This view will be stacked on the background returned by `previewBackgroundView()`.
-    /// It's recommended to return your theme in it, but keep in mind that the preview can be used even if there is no player running so please provide a default track info that will be displayed in this case. `Theme` class provides an overridable static variable `previewTrack` with title and artist
+    /// It's recommended to return your theme in it, but keep in mind that the preview can be
+    /// used even if there is no player running so please provide a default track info that
+    /// will be displayed in this case.
+    /// ``Theme`` class provides an overridable static variable ``previewTrack`` with title, artist
+    /// and album
     /// - Returns: a view wrapped in AnyView
     open func themePreview() -> AnyView {
         assertionFailure()
