@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Represents Theme's metadata
 public struct ThemeInfo: Hashable {
 
     /// The name of the theme
@@ -27,9 +28,9 @@ public struct ThemeInfo: Hashable {
     /// the full name of the author, for example: Adam Różyński
     public let author: String
 
-    /// file URL ti display the in the theme picker list
+    /// file URL to display the icon in the theme picker list
     ///
-    /// it will be displayed in the rounded rectangle
+    /// it will be displayed in the rounded rectangle; don't assume the
     public let iconFileURL: URL
 
     public init(

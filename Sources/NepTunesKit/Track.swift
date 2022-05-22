@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Represents a track in the app and its metadata.
 public protocol Track {
     var title: String { get }
     var artist: String { get }
