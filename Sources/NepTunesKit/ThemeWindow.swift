@@ -6,11 +6,20 @@
 
 import Cocoa
 
+/// Window used to display the widget with the theme on the desktop
+///
+/// ``ThemeWindow`` provides 3 functionality required for the widget:
+/// - displays the transparent, draggable window that's perfect for displaying artwork on user's screen,
+/// - manaes window position for each theme, by providing the default value and by persisting the last position, so the app can display the widget for a theme in the exact place the user left it
+/// - provides the infrastructure for the app to display a context menu when the user clicks on widget with secondary click
+///
 open class ThemeWindow: NSWindow {
 
     private let windowIdentifier: String
     public static let rightMouseDown = NSNotification.Name(rawValue: "com.micropixels.NepTunesKit.rightMouseDown")
 
+    /// initialize and sets up the window
+    /// - Parameter identifier: identifier used to persist the position
     public init(identifier: String) {
         self.windowIdentifier = identifier
         super.init(contentRect: .zero, styleMask: [.borderless], backing: .buffered, defer: true)
@@ -30,6 +39,11 @@ open class ThemeWindow: NSWindow {
         }
     }
 
+    // set it as unavailable
+    public init() {
+        fatalError()
+    }
+
     @objc func didMove(_ sender: Notification) {
         let window = sender.object as! NSWindow
         UserDefaults.standard.set(NSStringFromRect(window.frame), forKey: windowIdentifier)
@@ -37,7 +51,7 @@ open class ThemeWindow: NSWindow {
 
     private lazy var _contentView = ContentView()
 
-    open override var contentView: NSView? {
+    public override var contentView: NSView? {
         set {
             _contentView.subviews.forEach { $0.removeFromSuperview() }
             if let contentView = newValue {
@@ -55,6 +69,8 @@ open class ThemeWindow: NSWindow {
         }
     }
 
+    /// default position to place the widget on screen
+    /// when there is no position stored on disk
     open class var defaultFrame: NSRect {
         .init(x: 60, y: 60, width: 100, height: 100)
     }
