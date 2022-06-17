@@ -30,7 +30,13 @@ public struct ThemeInfo: Hashable {
 
     /// file URL to display the icon in the theme picker list
     ///
-    /// it will be displayed in the rounded rectangle; don't assume the
+    /// ## Discussion
+    /// Image should have be a reactangle with width of 80pts (so 160pxs on Retina display) and the main content should have 13pts of margin
+    ///
+    /// ## Notes
+    /// it will be displayed in the rounded rectangle;
+    /// don't assume the size of the corner radius as it can change in future releases;
+    ///
     public let iconFileURL: URL
 
     public init(
