@@ -11,3 +11,6 @@ Some examples:
 ## How to
 Download the repo, open the Package.swift in Xcode 13.4 or later and choose the "Build Documentation" in the "Product Menu".
 
+## Example
+Check out the [ArtworkText Theme](https://github.com/rurza/ArtworkText).
+
