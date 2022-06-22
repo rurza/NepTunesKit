@@ -6,6 +6,7 @@
 
 import Foundation
 import AppKit
+import SwiftUI
 
 /// Represents the app and its state to the theme.
 open class NepTunes: ObservableObject {
@@ -42,6 +43,10 @@ open class NepTunes: ObservableObject {
 
     /// Sets the volume of the player (not the system), range: 0...100
     open func setVolume(_ new: Int) { }
+
+    public static var defaultArtwork: Image {
+        Image("nocover")
+    }
 }
 
 /// Represents player state.
