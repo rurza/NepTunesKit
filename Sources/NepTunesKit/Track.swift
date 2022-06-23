@@ -17,18 +17,25 @@ public protocol Track {
     var isLoved: Bool? { get set }
     var duration: TimeInterval? { get }
 
+    /// can contain additional metadata in the future,
+    /// used as backing storage for compatibility
+    var additionalInfo: Dictionary<String, AnyHashable> { get }
+
     func isTheSameTrackAs(_ track: Track?) -> Bool 
 }
 
 public extension Track {
     func eraseToAnyTrack() -> AnyTrack {
-        AnyTrack(title: title,
-                 artist: artist,
-                 album: album,
-                 albumArtist: albumArtist,
-                 artworkData: artworkData,
-                 isLoved: isLoved,
-                 duration: duration)
+        AnyTrack(
+            title: title,
+            artist: artist,
+            album: album,
+            albumArtist: albumArtist,
+            artworkData: artworkData,
+            isLoved: isLoved,
+            duration: duration,
+            additionalInfo: additionalInfo
+        )
     }
 
     func isTheSameTrackAs(_ track: Track?) -> Bool {
@@ -44,6 +51,7 @@ public struct AnyTrack: Track, Equatable {
     public var artworkData: Data?
     public var isLoved: Bool?
     public var duration: TimeInterval?
+    public var additionalInfo: Dictionary<String, AnyHashable> = [:]
 
     public static func ==(lhs: Self, rhs: Self) -> Bool {
         lhs.title == rhs.title && lhs.artist == rhs.artist
@@ -59,7 +67,8 @@ public extension AnyTrack {
         album: String? = nil,
         albumArtist: String? = nil,
         artworkData: Data? = nil,
-        duration: TimeInterval? = nil
+        duration: TimeInterval? = nil,
+        additionalInfo: Dictionary<String, AnyHashable> = [:]
     ) {
         self.title = title
         self.artist = artist
@@ -67,5 +76,6 @@ public extension AnyTrack {
         self.albumArtist = albumArtist
         self.artworkData = artworkData
         self.duration = duration
+        self.additionalInfo = additionalInfo
     }
 }
