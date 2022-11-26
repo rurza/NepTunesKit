@@ -31,6 +31,7 @@ open class ThemeWindow: NSWindow {
         backgroundColor = .clear
         canHide = false
         isReleasedWhenClosed = false
+        isExcludedFromWindowsMenu = true
         NotificationCenter.default.addObserver(self, selector: #selector(didMove(_:)), name: Self.didMoveNotification, object: self)
         if let frame = UserDefaults.standard.object(forKey: identifier) as? String {
             setFrame(NSRectFromString(frame), display: false)
@@ -75,6 +76,9 @@ open class ThemeWindow: NSWindow {
         .init(x: 60, y: 60, width: 100, height: 100)
     }
 
+    open override func cascadeTopLeft(from topLeftPoint: NSPoint) -> NSPoint {
+        .zero
+    }
 }
 
 private class ContentView: NSView {
