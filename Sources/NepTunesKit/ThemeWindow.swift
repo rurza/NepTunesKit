@@ -16,7 +16,10 @@ import Cocoa
 open class ThemeWindow: NSWindow {
 
     private let windowIdentifier: String
-    public static let rightMouseDown = NSNotification.Name(rawValue: "com.micropixels.NepTunesKit.rightMouseDown")
+    private var topRightWindowIdentifier: String {
+        windowIdentifier + ".topRight"
+    }
+    public static let rightMouseDown = NSNotification.Name(rawValue: "software.micropixels.NepTunesKit.rightMouseDown")
 
     /// initialize and sets up the window
     /// - Parameter identifier: identifier used to persist the position
@@ -32,7 +35,12 @@ open class ThemeWindow: NSWindow {
         canHide = false
         isReleasedWhenClosed = false
         isExcludedFromWindowsMenu = true
-        NotificationCenter.default.addObserver(self, selector: #selector(didMove(_:)), name: Self.didMoveNotification, object: self)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(didMove(_:)),
+            name: Self.didMoveNotification,
+            object: self
+        )
         if let frame = UserDefaults.standard.object(forKey: identifier) as? String {
             setFrame(NSRectFromString(frame), display: false)
         } else {
@@ -48,6 +56,9 @@ open class ThemeWindow: NSWindow {
     @objc func didMove(_ sender: Notification) {
         let window = sender.object as! NSWindow
         UserDefaults.standard.set(NSStringFromRect(window.frame), forKey: windowIdentifier)
+        let topRightCorner = window.frame.origin.applying(.init(translationX: window.frame.width, y: 0))
+        let topRightPoint = NSPointFromCGPoint(topRightCorner)
+        UserDefaults.standard.set(NSStringFromPoint(topRightPoint), forKey: topRightWindowIdentifier)
     }
 
     private lazy var _contentView = ContentView()
@@ -68,6 +79,14 @@ open class ThemeWindow: NSWindow {
         get {
             _contentView.subviews.first
         }
+    }
+    
+    public var topRightCorner: CGPoint? {
+        guard let pointString = UserDefaults.standard.object(
+            forKey: topRightWindowIdentifier
+        ) as? String else { return nil }
+        let point = NSPointFromString(pointString)
+        return NSPointToCGPoint(point)
     }
 
     /// default position to place the widget on screen
