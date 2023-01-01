@@ -14,7 +14,6 @@ import Cocoa
 /// - provides the infrastructure for the app to display a context menu when the user clicks on widget with secondary click
 ///
 open class ThemeWindow: NSWindow {
-
     private let windowIdentifier: String
     public static let rightMouseDown = NSNotification.Name(rawValue: "com.micropixels.NepTunesKit.rightMouseDown")
 
@@ -78,6 +77,10 @@ open class ThemeWindow: NSWindow {
 
     open override func cascadeTopLeft(from topLeftPoint: NSPoint) -> NSPoint {
         .zero
+    }
+    
+    open override func constrainFrameRect(_ frameRect: NSRect, to screen: NSScreen?) -> NSRect {
+        frameRect
     }
 }
 
