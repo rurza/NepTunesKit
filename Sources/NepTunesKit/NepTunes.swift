@@ -49,6 +49,7 @@ open class NepTunes: ObservableObject {
     }
 }
 
+// sourcery: AutoEquatable
 /// Represents player state.
 /// NepTunes always manages one player at the time and this player is known as the "current player"
 public struct NepTunesPlayerState: Equatable {
@@ -57,7 +58,7 @@ public struct NepTunesPlayerState: Equatable {
 
     /// The current track (can be paused).
     /// It's nil if the player is running but the playback was stopped or the player just launched.
-    public let currentTrack: AnyTrack?
+    public let currentTrack: Track?
     public let shuffle: Bool
 
     /// the scale is from 0 to 100
@@ -67,7 +68,7 @@ public struct NepTunesPlayerState: Equatable {
     public init(
         playbackState: PlayerPlaybackState,
         playerType: PlayerType,
-        currentTrack: AnyTrack? = nil,
+        currentTrack: Track? = nil,
         shuffle: Bool,
         volume: Int,
         repeatMode: RepeatMode

@@ -128,12 +128,8 @@ open class Theme: Equatable, Identifiable, Hashable {
 
     /// Helper method that you can use to display a track in preview, even if
     /// there is no music player running
-    open class var previewTrack: AnyTrack {
-        AnyTrack(
-            title: "Title",
-            artist: "Artist",
-            album: "Album"
-        )
+    open class var previewTrack: Track {
+        Track(title: "Title", artist: "Artist", album: "Album")
     }
 
     public func hash(into hasher: inout Hasher) {
