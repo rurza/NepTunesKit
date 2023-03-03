@@ -13,9 +13,9 @@ public struct Track: Equatable {
     public let artist: String
     public let album: String?
     public let albumArtist: String?
-    public let artworkData: Data?
-    public let isLoved: Bool?
-    public let duration: TimeInterval?
+    public var artworkData: Data?
+    public var isLoved: Bool?
+    public var duration: TimeInterval?
 
     /// can contain additional metadata in the future,
     /// used as backing storage for compatibility
@@ -39,5 +39,9 @@ public struct Track: Equatable {
         self.isLoved = isLoved
         self.duration = duration
         self.additionalInfo = additionalInfo
+    }
+    
+    public func isTheSameTrackAs(_ track: Track) -> Bool {
+        self.artist == track.artist && self.title == track.title && self.album == track.album
     }
 }
