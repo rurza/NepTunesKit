@@ -14,6 +14,7 @@ import Cocoa
 /// - provides the infrastructure for the app to display a context menu when the user clicks on widget with secondary click
 ///
 open class ThemeWindow: NSWindow {
+    private lazy var _contentView = ContentView()
     private let windowIdentifier: String
     public static let rightMouseDown = NSNotification.Name(rawValue: "com.micropixels.NepTunesKit.rightMouseDown")
 
@@ -39,7 +40,7 @@ open class ThemeWindow: NSWindow {
         }
     }
 
-    // set it as unavailable
+    @available(*, unavailable)
     public init() {
         fatalError()
     }
@@ -49,7 +50,6 @@ open class ThemeWindow: NSWindow {
         UserDefaults.standard.set(NSStringFromRect(window.frame), forKey: windowIdentifier)
     }
 
-    private lazy var _contentView = ContentView()
 
     public override var contentView: NSView? {
         set {
@@ -81,6 +81,29 @@ open class ThemeWindow: NSWindow {
     
     open override func constrainFrameRect(_ frameRect: NSRect, to screen: NSScreen?) -> NSRect {
         frameRect
+    }
+
+    private func preventSettingWindowPositionBeyondScreenBoundsIfNeeded(_ frame: inout NSRect, window: NSWindow) {
+        if frame.origin.x + frame.size.width < 0 {
+            frame.origin.x = 0
+        }
+        if frame.origin.y + frame.size.height < 0 {
+            frame.origin.y = 0
+        }
+        guard let screen = window.screen else { return }
+        let screenFrame = screen.visibleFrame
+        if frame.origin.x > screenFrame.width {
+            frame.origin.x = screenFrame.width - frame.width
+        }
+        if frame.origin.y > screenFrame.height {
+            frame.origin.y = screenFrame.height - frame.height
+        }
+    }
+
+    open override func setFrame(_ frameRect: NSRect, display flag: Bool) {
+        var copy = frameRect
+        preventSettingWindowPositionBeyondScreenBoundsIfNeeded(&copy, window: self)
+        super.setFrame(copy, display: flag)
     }
 }
 
