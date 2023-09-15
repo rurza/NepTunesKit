@@ -32,24 +32,14 @@ open class ThemeWindow: NSWindow {
         canHide = false
         isReleasedWhenClosed = false
         isExcludedFromWindowsMenu = true
-        NotificationCenter.default.addObserver(self, selector: #selector(didMove(_:)), name: Self.didMoveNotification, object: self)
-        if let frame = UserDefaults.standard.object(forKey: identifier) as? String {
-            setFrame(NSRectFromString(frame), display: false)
-        } else {
-            setFrame(Self.defaultFrame, display: false)
-        }
+        setFrame(defaultFrame, display: false)
+        setFrameAutosaveName(identifier)
     }
 
     @available(*, unavailable)
     public init() {
         fatalError()
     }
-
-    @objc func didMove(_ sender: Notification) {
-        let window = sender.object as! NSWindow
-        UserDefaults.standard.set(NSStringFromRect(window.frame), forKey: windowIdentifier)
-    }
-
 
     public override var contentView: NSView? {
         set {
@@ -71,9 +61,7 @@ open class ThemeWindow: NSWindow {
 
     /// default position to place the widget on screen
     /// when there is no position stored on disk
-    open class var defaultFrame: NSRect {
-        .init(x: 60, y: 60, width: 100, height: 100)
-    }
+    open var defaultFrame: NSRect { .init(x: 60, y: 60, width: 100, height: 100) }
 
     open override func cascadeTopLeft(from topLeftPoint: NSPoint) -> NSPoint {
         .zero
@@ -81,29 +69,6 @@ open class ThemeWindow: NSWindow {
     
     open override func constrainFrameRect(_ frameRect: NSRect, to screen: NSScreen?) -> NSRect {
         frameRect
-    }
-
-    private func preventSettingWindowPositionBeyondScreenBoundsIfNeeded(_ frame: inout NSRect, window: NSWindow) {
-        if frame.origin.x + frame.size.width < 0 {
-            frame.origin.x = 0
-        }
-        if frame.origin.y + frame.size.height < 0 {
-            frame.origin.y = 0
-        }
-        guard let screen = window.screen else { return }
-        let screenFrame = screen.visibleFrame
-        if frame.origin.x > screenFrame.width {
-            frame.origin.x = screenFrame.width - frame.width
-        }
-        if frame.origin.y > screenFrame.height {
-            frame.origin.y = screenFrame.height - frame.height
-        }
-    }
-
-    open override func setFrame(_ frameRect: NSRect, display flag: Bool) {
-        var copy = frameRect
-        preventSettingWindowPositionBeyondScreenBoundsIfNeeded(&copy, window: self)
-        super.setFrame(copy, display: flag)
     }
 }
 
