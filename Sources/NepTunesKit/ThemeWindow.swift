@@ -32,7 +32,7 @@ open class ThemeWindow: NSWindow {
         canHide = false
         isReleasedWhenClosed = false
         isExcludedFromWindowsMenu = true
-        setFrame(defaultFrame, display: false)
+        setFrame(Self.defaultFrame, display: false)
         setFrameAutosaveName(identifier)
     }
 
@@ -61,7 +61,7 @@ open class ThemeWindow: NSWindow {
 
     /// default position to place the widget on screen
     /// when there is no position stored on disk
-    open var defaultFrame: NSRect { .init(x: 60, y: 60, width: 100, height: 100) }
+    open class var defaultFrame: NSRect { .init(x: 60, y: 60, width: 100, height: 100) }
 
     open override func cascadeTopLeft(from topLeftPoint: NSPoint) -> NSPoint {
         .zero
