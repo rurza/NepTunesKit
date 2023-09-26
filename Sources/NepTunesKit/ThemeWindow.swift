@@ -34,6 +34,11 @@ open class ThemeWindow: NSWindow {
         isExcludedFromWindowsMenu = true
         setFrame(Self.defaultFrame, display: false)
         setFrameAutosaveName(identifier)
+        if let stringFrame = UserDefaults.standard.object(forKey: identifier) as? String {
+            let frame = NSRectFromString(stringFrame)
+            setFrame(frame, display: true)
+            UserDefaults.standard.removeObject(forKey: identifier)
+        }
     }
 
     @available(*, unavailable)
