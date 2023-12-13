@@ -32,12 +32,19 @@ open class ThemeWindow: NSWindow {
         canHide = false
         isReleasedWhenClosed = false
         isExcludedFromWindowsMenu = true
-        setFrame(Self.defaultFrame, display: false)
-        setFrameAutosaveName(identifier)
-        if let stringFrame = UserDefaults.standard.object(forKey: identifier) as? String {
+        let userDefaults = UserDefaults.standard
+        if let stringFrame = userDefaults.object(forKey: identifier) as? String {
             let frame = NSRectFromString(stringFrame)
             setFrame(frame, display: true)
-            UserDefaults.standard.removeObject(forKey: identifier)
+            userDefaults.removeObject(forKey: identifier)
+        }
+        setFrameAutosaveName(identifier)
+        // the self.frameAutosaveName returns some garbage in the initializer; beside it's not the actual key
+        // from the User Defaults; without this condition window's position won't be restored correctly!!!
+        if userDefaults.string(forKey: "NSWindow Frame \(identifier)") == nil {
+            setFrame(Self.defaultFrame, display: false)
+        } else {
+            setFrameUsingName(identifier, force: true)
         }
     }
 
