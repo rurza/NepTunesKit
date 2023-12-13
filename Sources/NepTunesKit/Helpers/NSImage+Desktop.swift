@@ -21,7 +21,7 @@ public extension NSImage {
             }
             // we need windows named like "Desktop Picture %"
             guard let name = window["kCGWindowName"] as? String else { continue }
-            if !name.hasPrefix("Desktop Picture") {
+            if !name.hasPrefix("Desktop Picture") && !name.hasPrefix("Wallpaper") {
                 continue
             }
             // this belongs to a screen
